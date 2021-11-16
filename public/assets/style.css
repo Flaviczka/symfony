@@ -1,0 +1,17 @@
+#tableTasks th,
+#tableTasks td {
+    padding: 2em;
+}
+
+#tableTasks {
+    margin: 3em;
+    border-collapse: collapse;
+}
+
+#tableTasks_filter {
+    margin: 2em;
+}
+
+#tableTasks_length {
+    margin: 2em;
+}
