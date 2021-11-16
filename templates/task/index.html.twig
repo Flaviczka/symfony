@@ -5,6 +5,7 @@
 
 {% block body %}
 	<div class="container">
+		<a href="{{ path('task_create') }}" class="btn btn-primary">Ajouter</a>
 		<table class="table-striped table-bordered" id="tableTasks">
 			<thead>
 				<th>Id</th>
@@ -12,6 +13,8 @@
 				<th>Description</th>
 				<th>Date effective</th>
 				<th>Catégorie</th>
+				<th></th>
+				<th></th>
 			</thead>
 			<tbody>
 				{% if tasks is defined %}
@@ -22,6 +25,12 @@
 							<td>{{ task.description }}</td>
 							<td>{{ task.dueAt | date('d/m/Y H:i') }}</td>
 							<td>{{ task.tag.name }}</td>
+							<td>
+								<a href="{{ path('task_update', {'id': task.id}) }}" class="btn btn-success">Modifier</a>
+							</td>
+							<td>
+								<a href="{{ path('task_delete', {'id': task.id}) }}" class="btn btn-danger">Supprimer</a>
+							</td>
 						</tr>
 					{% endfor %}
 				{% endif %}
