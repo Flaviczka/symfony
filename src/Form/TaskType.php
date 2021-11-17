@@ -52,7 +52,7 @@ class TaskType extends AbstractType
                 }, 'choice_label' => 'name'
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Enregistrer', 'attr' => ['btn']
+                'label' => $this->translator->trans('general.button.success'), 'attr' => ['btn']
             ]);
     }
 

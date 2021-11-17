@@ -36,7 +36,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/{_locale}/task/listing", name="task_listing")
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         //$translator->trans('general.button.delete');
         // $translated = new TranslatableMessage('Symfony is great');
@@ -54,7 +54,7 @@ class TaskController extends AbstractController
         //dump($tasks);
 
         return $this->render('task/index.html.twig', [
-            'tasks' => $tasks
+            'tasks' => $tasks, 'locale' => $request->getLocale()
         ]);
     }
 

@@ -17,3 +17,6 @@ general:
     add: Create
     update: Update
 nav:
+sLengthMenu: Show _MENU_ records per page
+sSearch: Search
+sInfo: Showing _START_ to _END_ of _TOTAL_ records

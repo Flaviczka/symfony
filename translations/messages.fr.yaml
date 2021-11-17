@@ -17,3 +17,6 @@ general:
     add: Ajouter
     update: Modifier
 nav:
+sLengthMenu: Montrer _MENU_ entrées par page
+sSearch: Rechercher
+sInfo: Affichage de _START_ à _END_ sur _TOTAL_ entrées
