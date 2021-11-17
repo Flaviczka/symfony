@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class TaskController extends AbstractController
 {
@@ -33,30 +34,33 @@ class TaskController extends AbstractController
 
 
     /**
-     * @Route("/task/listing", name="task_listing")
+     * @Route("/{_locale}/task/listing", name="task_listing")
      */
     public function index(): Response
     {
+        //$translator->trans('general.button.delete');
+        // $translated = new TranslatableMessage('Symfony is great');
         //Recuperation des infos user
         //$user = $this->getUser();
         //dd($user);
         //Recuperation du répository de nos Tasks avec Doctrine
         //$repository = $this->getDoctrine()->getRepository(Task::class);
+        //$this->addFlash('danger', $translator->trans('general.button.delete'));
 
         //récupération de toutes les données
         $tasks = $this->repository->findAll();
-
+        //echo $translated;
         //Affichage des données
         //dump($tasks);
 
         return $this->render('task/index.html.twig', [
-            'tasks' => $tasks,
+            'tasks' => $tasks
         ]);
     }
 
 
     /**
-     * @Route("/task/create", name="task_create")
+     * @Route("/{_locale}/task/create", name="task_create")
      */
     /*
     public function createTask(Request $request): Response
@@ -115,8 +119,8 @@ class TaskController extends AbstractController
     } */
 
     /**
-     * @Route("/task/create", name="task_create")
-     * @Route("/task/update/{id}", name="task_update", requirements={"id"="\d+"})
+     * @Route("/{_locale}/task/create", name="task_create")
+     * @Route("/{_locale}/task/update/{id}", name="task_update", requirements={"id"="\d+"})
      */
     public function task(Task $task = null, Request $request): Response
     {
@@ -148,7 +152,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/delete/{id}", name="task_delete", requirements={"id"="\d+"})
+     * @Route("/{_locale}/task/delete/{id}", name="task_delete", requirements={"id"="\d+"})
      */
     public function deleteTask(Task $task): Response
     {

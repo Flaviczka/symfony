@@ -1,0 +1,19 @@
+Symfony is great: I love symfony
+Log in: Log in
+
+auth:
+  msg: You are logged in as
+  logout: Log out
+  login: Log in
+general:
+  name: Name
+  description: Description
+  due_date: Due Date
+  category: Tag
+  button:
+    success: Confirm
+    cancel: Cancel
+    delete: Delete
+    add: Create
+    update: Update
+nav:

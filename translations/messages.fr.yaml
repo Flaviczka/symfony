@@ -1,0 +1,19 @@
+Symfony is great: J'aime Symfony
+Log in: Connexion
+
+auth:
+  msg: Vous êtes connecté en tant que
+  logout: Déconnexion
+  login: Se connecter
+general:
+  name: Nom
+  description: Description
+  due_date: Date effective
+  category: Catégorie
+  button:
+    success: Valider
+    cancel: Annuler
+    delete: Supprimer
+    add: Ajouter
+    update: Modifier
+nav:
