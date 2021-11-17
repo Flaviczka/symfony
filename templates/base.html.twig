@@ -7,7 +7,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																																																																           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																														           and uncomment the following Encore helpers to start using Symfony UX #}
 
 		{% block stylesheets %}
 			<link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
@@ -19,6 +19,11 @@
 		{% endblock %}
 	</head>
 	<body>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<p>Vous êtes authentifié en tant que :
+				{{ app.user.email }}</p>
+			<a href="{{ path('app_logout') }}">Logout</a>
+		{% endif %}
 		{% block body %}{% endblock %}
 
 	</body>
