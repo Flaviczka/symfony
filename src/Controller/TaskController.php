@@ -14,6 +14,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
+/**
+ * @Route("/task", name="task_")
+ */
 class TaskController extends AbstractController
 {
     /**
@@ -34,7 +37,7 @@ class TaskController extends AbstractController
 
 
     /**
-     * @Route("/{_locale}/task/listing", name="task_listing")
+     * @Route("/listing", name="listing")
      */
     public function index(Request $request): Response
     {
@@ -60,7 +63,7 @@ class TaskController extends AbstractController
 
 
     /**
-     * @Route("/{_locale}/task/create", name="task_create")
+     * @Route("/task/create", name="task_create")
      */
     /*
     public function createTask(Request $request): Response
@@ -119,8 +122,8 @@ class TaskController extends AbstractController
     } */
 
     /**
-     * @Route("/{_locale}/task/create", name="task_create")
-     * @Route("/{_locale}/task/update/{id}", name="task_update", requirements={"id"="\d+"})
+     * @Route("/create", name="create")
+     * @Route("/update/{id}", name="update", requirements={"id"="\d+"})
      */
     public function task(Task $task = null, Request $request): Response
     {
@@ -152,7 +155,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/task/delete/{id}", name="task_delete", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", name="delete", requirements={"id"="\d+"})
      */
     public function deleteTask(Task $task): Response
     {

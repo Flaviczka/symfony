@@ -5,6 +5,7 @@ auth:
   please: Please log in
   email: Email
   pw: Password
+
 general:
   name: Name
   description: Description
