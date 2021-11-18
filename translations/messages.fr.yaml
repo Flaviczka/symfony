@@ -1,10 +1,11 @@
-Symfony is great: J'aime Symfony
-Log in: Connexion
-
 auth:
   msg: Vous êtes connecté en tant que
   logout: Déconnexion
   login: Se connecter
+  please: Veuillez vous connecter
+  email: E-mail
+  pw: Mot de passe
+
 general:
   name: Nom
   description: Description
@@ -20,3 +21,7 @@ nav:
 sLengthMenu: Montrer _MENU_ entrées par page
 sSearch: Rechercher
 sInfo: Affichage de _START_ à _END_ sur _TOTAL_ entrées
+first: Début
+previous: Précédent
+next: Suivant
+last: Fin

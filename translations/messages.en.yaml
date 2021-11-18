@@ -1,10 +1,10 @@
-Symfony is great: I love symfony
-Log in: Log in
-
 auth:
   msg: You are logged in as
   logout: Log out
   login: Log in
+  please: Please log in
+  email: Email
+  pw: Password
 general:
   name: Name
   description: Description
@@ -20,3 +20,7 @@ nav:
 sLengthMenu: Show _MENU_ records per page
 sSearch: Search
 sInfo: Showing _START_ to _END_ of _TOTAL_ records
+first: First
+previous: Previous
+next: Next
+last: Last
