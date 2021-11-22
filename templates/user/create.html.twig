@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<br><br>
+	<div class="d-flex justify-content-center">
+		<h1>GESTION UTILISATEUR</h1>
+	</div>
+	<br><br>
+	<div class="container">
+		{{ form_start(form) }}
+			{{ form_widget(form) }}
+		{{ form_end(form) }}
+		<div>
+			<a href="{{ path('user_listing', app.request.attributes.get('_route_params')) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">{{'general.button.back'|trans}}</a>
+			<a href="{{ path('app_login', app.request.attributes.get('_route_params')) }}" class="btn btn-warning btn-lg active" role="button" aria-pressed="true">{{'general.button.home'|trans}}</a>
+		</div>
+
+	</div>
+
+{% endblock %}

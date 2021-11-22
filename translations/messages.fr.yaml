@@ -17,6 +17,8 @@ general:
     delete: Supprimer
     add: Ajouter
     update: Modifier
+    back: Retour
+    home: Accueil
 nav:
 sLengthMenu: Montrer _MENU_ entrées par page
 sSearch: Rechercher
@@ -25,3 +27,11 @@ first: Début
 previous: Précédent
 next: Suivant
 last: Fin
+user:
+  id: ID
+  password: Mot de passe
+  repeat_password: Confirmer le mot de passe
+  email: E-mail
+  roles: Roles
+  admin: Administrateur
+  user: Utilisateur

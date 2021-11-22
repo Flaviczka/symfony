@@ -17,6 +17,8 @@ general:
     delete: Delete
     add: Create
     update: Update
+    back: Go back
+    home: Home
 nav:
 sLengthMenu: Show _MENU_ records per page
 sSearch: Search
@@ -25,3 +27,11 @@ first: First
 previous: Previous
 next: Next
 last: Last
+user:
+  id: ID
+  password: Password
+  repeat_password: Repeat password
+  email: Email
+  roles: Roles
+  admin: Administrator
+  user: User

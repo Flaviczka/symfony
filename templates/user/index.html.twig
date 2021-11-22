@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des tâches
+{% block title %}Liste des utilisateurs
 {% endblock %}
 
 {% block body %}
 
 	{# <p>{{translated}}</p> #}
 	{# <p>{{translated|trans}}</p> #}
-		<div class="container"> {% for label, messages in app.flashes %}
+    <div class="container"> {% for label, messages in app.flashes %}
 			{% for message in messages %}
 				<div class="d-flex justify-content-center">
 					<p class="fw-bold text-{{ label }}">
@@ -18,31 +18,27 @@
 		{% endfor %}
 	
 
-	<a href="{{ path('task_create') }}" class="btn btn-primary">{% trans from "messages" %}general.button.add{% endtrans %}</a>
-	<table class="table-striped table-bordered" id="tableTasks">
+	<a href="{{ path('user_create') }}" class="btn btn-primary">{% trans from "messages" %}general.button.add{% endtrans %}</a>
+	<table class="table-striped table-bordered" id="tableUsers">
 		<thead>
-			<th>Id</th>
-			<th>{% trans from "messages" %}general.name{% endtrans %}</th>
-			<th>{% trans from "messages" %}general.description{% endtrans %}</th>
-			<th>{% trans from "messages" %}general.due_date{% endtrans %}</th>
-			<th>{% trans from "messages" %}general.category{% endtrans %}</th>
+			<th>ID</th>
+			<th>{% trans from "messages" %}user.email{% endtrans %}</th>
+			<th>{% trans from "messages" %}user.roles{% endtrans %}</th>
 			<th></th>
 			<th></th>
 		</thead>
 		<tbody>
-			{% if tasks is defined %}
-				{% for task in tasks %}
+			{% if users is defined %}
+				{% for user in users %}
 					<tr>
-						<th scope="row">{{ task.id }}</th>
-						<td>{{ task.name }}</td>
-						<td>{{ task.description }}</td>
-						<td>{{ task.dueAt | date('d/m/Y H:i') }}</td>
-						<td>{{ task.tag.name }}</td>
+						<th scope="row">{{ user.id }}</th>
+						<td>{{ user.email }}</td>
+						<td>{{ user.roles |join(', ') }}</td>
 						<td>
-							<a href="{{ path('task_update', {'id': task.id}) }}" class="btn btn-success">{% trans from "messages" %}general.button.update{% endtrans %}</a>
+							<a href="{{ path('user_update', {'id': user.id}) }}" class="btn btn-success">{% trans from "messages" %}general.button.update{% endtrans %}</a>
 						</td>
 						<td>
-							<a href="{{ path('task_delete', {'id': task.id}) }}" class="btn btn-danger">{% trans from "messages" %}general.button.delete{% endtrans %}</a>
+							<a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-danger">{% trans from "messages" %}general.button.delete{% endtrans %}</a>
 						</td>
 					</tr>
 				{% endfor %}
@@ -51,14 +47,11 @@
 		</tbody>
 	</table>
 </div>
-
-	
-
 {% endblock %}
 {% block javascripts %}
 <script>
 $(document).ready(function () {
-$('#tableTasks').DataTable({
+$('#tableUsers').DataTable({
 language: {
 "sLengthMenu": "{% trans from 'messages' %}sLengthMenu                                                  {% endtrans %}",
 "sSearch": "{% trans from 'messages' %}sSearch                                               {% endtrans %}",
@@ -78,3 +71,4 @@ language: {
 </script>
 		{#{{ encore_entry_script_tags('app') }}#}
 	{% endblock %}
+
