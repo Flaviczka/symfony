@@ -29,6 +29,7 @@ next: Next
 last: Last
 user:
   title: User Management
+  index: Users List
   id: ID
   password: Password
   repeat_password: Repeat password

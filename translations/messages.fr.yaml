@@ -29,6 +29,7 @@ next: Suivant
 last: Fin
 user:
   title: Gestion Utilisateur
+  index: Liste des Utilisateurs
   id: ID
   password: Mot de passe
   repeat_password: Confirmer le mot de passe

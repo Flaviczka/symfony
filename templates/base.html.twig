@@ -41,7 +41,47 @@
 	<script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	
 	{% block javascripts %}
+	<script>
+$(document).ready(function () {
+$('#tableTasks').DataTable({
+language: {
+"sLengthMenu": "{% trans from 'messages' %}sLengthMenu                                                  {% endtrans %}",
+"sSearch": "{% trans from 'messages' %}sSearch                                               {% endtrans %}",
+"sInfo": "{% trans from 'messages' %}sInfo                                             {% endtrans %}",
+"sInfoEmpty": "Showing 0 to 0 of 0 records",
+"sInfoFiltered": "(filtered from _MAX_ total records)",
+"paginate": {
+"first": "{% trans from 'messages' %}first                                            {% endtrans %}",
+"previous": "{% trans from 'messages' %}previous                         {% endtrans %}",
+"next": "{% trans from 'messages' %}next                                            {% endtrans %}",
+"last": "{% trans from 'messages' %}last                         {% endtrans %}"
+}
+}
 
+});
+});
+</script>
+
+		<script>
+$(document).ready(function () {
+$('#tableUsers').DataTable({
+language: {
+"sLengthMenu": "{% trans from 'messages' %}sLengthMenu                                                  {% endtrans %}",
+"sSearch": "{% trans from 'messages' %}sSearch                                               {% endtrans %}",
+"sInfo": "{% trans from 'messages' %}sInfo                                             {% endtrans %}",
+"sInfoEmpty": "Showing 0 to 0 of 0 records",
+"sInfoFiltered": "(filtered from _MAX_ total records)",
+"paginate": {
+"first": "{% trans from 'messages' %}first                                            {% endtrans %}",
+"previous": "{% trans from 'messages' %}previous                         {% endtrans %}",
+"next": "{% trans from 'messages' %}next                                            {% endtrans %}",
+"last": "{% trans from 'messages' %}last                         {% endtrans %}"
+}
+}
+
+});
+});
+</script>
 		{#{{ encore_entry_script_tags('app') }}#}
 	{% endblock %}
 </html></html>

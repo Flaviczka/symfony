@@ -15,3 +15,21 @@
 #tableTasks_length {
     margin: 2em;
 }
+
+#tableUsers th,
+#tableUsers td {
+    padding: 2em;
+}
+
+#tableUsers {
+    margin: 3em;
+    border-collapse: collapse;
+}
+
+#tableUsers_filter {
+    margin: 2em;
+}
+
+#tableUsers_length {
+    margin: 2em;
+}
