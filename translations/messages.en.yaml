@@ -5,7 +5,18 @@ auth:
   please: Please log in
   email: Email
   pw: Password
-
+  reset: Reset password
+  text_reset: Enter your email address and we will send you a link to reset your password.
+  email_ok: Password Reset Email Sent
+  confirm_reset:
+    If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+    This link will expire in
+  email_notok: If you don't receive an email please check your spam folder or
+  try_again: try again
+  mail_greetings: Hi!
+  mail_link: To reset your password, please visit the following link
+  mail_expire: This link will expire in
+  mail_ending: Cheers!
 general:
   name: Name
   description: Description
@@ -19,6 +30,7 @@ general:
     update: Update
     back: Go back
     home: Home
+    download: Download
 nav:
 sLengthMenu: Show _MENU_ records per page
 sSearch: Search

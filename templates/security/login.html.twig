@@ -41,6 +41,6 @@
 		<button class="btn btn-lg btn-primary" type="submit">
 			{% trans from "messages" %}auth.login{% endtrans %}
 		</button>
-		<a href="{{ path('app_forgot_password_request') }}">reset password</a>
+		<a href="{{ path('app_forgot_password_request') }}">{{'auth.reset'|trans}}</a>
 	</form>
 {% endblock %}

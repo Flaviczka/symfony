@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Task;
 use App\Form\TaskType;
 use Doctrine\ORM\EntityManager;
@@ -10,9 +12,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/task", name="task_")
@@ -173,5 +175,36 @@ class TaskController extends AbstractController
         );
 
         return $this->redirectToRoute("task_listing");
+    }
+
+    /**
+     * @Route("/listing/download", name="download")
+     */
+    public function downloadPdf()
+    {
+        $tasks = $this->repository->findAll();
+        // Définition des options du pdf
+        $pdfoption = new Options;
+        //Police par default
+        $pdfoption->set('defaultFont', 'Arial');
+        $pdfoption->setIsRemoteEnabled(true);
+
+        // On instancie DOMDF
+        $dompdf = new Dompdf($pdfoption);
+        //On genére le html
+        $html = $this->renderView('pdf/pdfdownload.html.twig', [
+            'tasks' => $tasks,
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+
+        //On génère un nom de fichier
+        $fichier = 'LE PDF OUAIS OUAIS OUAIS CA MARCHE';
+        //Envoyer le pdf au navigateur
+        $dompdf->stream($fichier, [
+            'Attachement' => true
+        ]);
+        return new Response();
     }
 }

@@ -5,6 +5,19 @@ auth:
   please: Veuillez vous connecter
   email: E-mail
   pw: Mot de passe
+  reset: Réinitialiser le mot de passe
+  text_reset: Entrez votre adresse e-mail et nous vous enverrons un lien de réinitialisation.
+  email_ok: E-mail réinitialisation mot de passe envoyé
+  confirm_reset:
+    S'il existe un compte correspondant à cette adresse, un e-mail contenant un lien de réinitialisation a été envoyé.
+    Ce lien exipera le
+  email_notok: Si vous ne recevez pas d'e-mail, regardez dans vos spams ou
+  try_again: réessayer
+  mail_greetings: Bonjour!
+  mail_link: Pour réinitialiser votre mot de passe, suivez le lien suivant
+
+  mail_expire: Ce lien expirera le
+  mail_ending: Ciao!
 
 general:
   name: Nom
@@ -19,6 +32,7 @@ general:
     update: Modifier
     back: Retour
     home: Accueil
+    download: Télécharger
 nav:
 sLengthMenu: Montrer _MENU_ entrées par page
 sSearch: Rechercher
