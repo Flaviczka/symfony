@@ -80,6 +80,12 @@ class UserController extends AbstractController
             }
             $this->manager->persist($user);
             $this->manager->flush();
+
+            $this->addFlash(
+                'success',
+                'l\'action a bien été effectuée'
+            );
+
             return $this->redirectToRoute('user_listing');
         }
         return $this->render('user/create.html.twig', [
@@ -95,6 +101,11 @@ class UserController extends AbstractController
     {
         $this->manager->remove($user);
         $this->manager->flush();
+
+        $this->addFlash(
+            'success',
+            'la suppression a bien été effectuée'
+        );
         return $this->redirectToRoute('user_listing');
     }
 }

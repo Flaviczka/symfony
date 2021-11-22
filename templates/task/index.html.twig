@@ -19,6 +19,8 @@
 	
 
 	<a href="{{ path('task_create') }}" class="btn btn-primary">{% trans from "messages" %}general.button.add{% endtrans %}</a>
+	{% if is_granted('ROLE_ADMIN') %}<a href="{{ path('user_listing') }}" class="btn btn-primary">{% trans from "messages" %}user.title{% endtrans %}</a>{% endif %}
+	
 	<table class="table-striped table-bordered" id="tableTasks">
 		<thead>
 			<th>Id</th>
