@@ -28,6 +28,7 @@ previous: Précédent
 next: Suivant
 last: Fin
 user:
+  title: Gestion Utilisateur
   id: ID
   password: Mot de passe
   repeat_password: Confirmer le mot de passe

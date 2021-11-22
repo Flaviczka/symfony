@@ -50,13 +50,13 @@ class UserUpdateType extends AbstractType
                     'multiple' => false
                 ]
             ])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'error_bubbling' => true,
-                'invalid_message' => 'm!m FO SESIR 2 FOI LE MEM',
-                'first_options' => ['label' => $this->translator->trans("user.password")],
-                'second_options' => ['label' => $this->translator->trans("user.repeat_password")],
-            ])
+            // ->add('password', RepeatedType::class, [
+            //     'type' => PasswordType::class,
+            //     'error_bubbling' => true,
+            //     'invalid_message' => 'm!m FO SESIR 2 FOI LE MEM',
+            //     'first_options' => ['label' => $this->translator->trans("user.password")],
+            //     'second_options' => ['label' => $this->translator->trans("user.repeat_password")],
+            // ])
             ->add('save', SubmitType::class, [
                 'label' => $this->translator->trans("general.button.success"),
                 'attr' => [
