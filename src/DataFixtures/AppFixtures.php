@@ -2,29 +2,38 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Status;
 use Faker\Factory;
 use App\Entity\Tag;
 use App\Entity\Task;
 use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Migrations\Version\State;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
 
     /**
      * @var UserPasswordHasherInterface
      */
     private $encoder;
 
-    public function __construct(UserPasswordHasherInterface $encoder)
+    public function __construct(UserPasswordHasherInterface $encoder, TranslatorInterface $translator)
     {
         $this->encoder = $encoder;
+        $this->translator = $translator;
     }
 
     public function load(ObjectManager $manager): void
     {
+
         // créer un objet faker
         $faker = Factory::create('fr_FR');
 
@@ -39,11 +48,33 @@ class AppFixtures extends Fixture
             $manager->persist($tag);
         }
 
+        // Statut « à faire »
+        $todo = new Status;
+        // Label identifiable facilement
+        $todo->setLabel('1');
+        // faire persister l’objet
+        $manager->persist($todo);
+
+        // Statut « en cours »
+        $wip = new Status;
+        // Label identifiable facilement
+        $wip->setLabel('2');
+        // faire persister l’objet
+        $manager->persist($wip);
+
+        // Statut « terminée »
+        $done = new Status;
+        // Label identifiable facilement
+        $done->setLabel('3');
+        // faire persister l’objet
+        $manager->persist($done);
+
         //on push les categorie en BDD
         $manager->flush();
 
         //récupération des catégories créées
         $tags = $manager->getRepository(Tag::class)->findAll();
+        $status = $manager->getRepository(Status::class)->findAll();
 
         //création entre 15 et 30 tâches aléatoire
         for ($t = 0; $t < mt_rand(15, 30); $t++) {
@@ -55,7 +86,9 @@ class AppFixtures extends Fixture
                 ->setDescription($faker->paragraph(3))
                 ->setCreatedAt(new \DateTime())
                 ->setDueAt($faker->dateTimeBetween('now', '6 months'))
-                ->setTag($faker->randomElement($tags));
+                ->setTag($faker->randomElement($tags))
+                ->setStatus($faker->randomElement($status));
+
 
             //faire persister les données
             $manager->persist($task);

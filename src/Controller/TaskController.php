@@ -6,9 +6,11 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManager;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Stmt\Switch_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -54,6 +56,7 @@ class TaskController extends AbstractController
 
         //récupération de toutes les données
         $tasks = $this->repository->findAll();
+
         //echo $translated;
         //Affichage des données
         //dump($tasks);
@@ -127,7 +130,7 @@ class TaskController extends AbstractController
      * @Route("/create", name="create")
      * @Route("/update/{id}", name="update", requirements={"id"="\d+"})
      */
-    public function task(Task $task = null, Request $request): Response
+    public function task(Task $task = null, Request $request, StatusRepository $repository): Response
     {
         if (!$task) {
             $task = new Task;
@@ -138,7 +141,21 @@ class TaskController extends AbstractController
         $form = $this->createForm(TaskType::class, $task, []);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // switch ($form['status']->getDaTa()) {
+            //     case 1:
+            //         $form['status']->setDaTa($repository->find(1));
+            //         break;
+            //     case 2:
+            //         $form['status']->setDaTa($repository->find(2));
+            //         break;
+            //     case 3:
+            //         $form['status']->setDaTa($repository->find(3));
+            //         break;
+            // }
             /* $task->setName($form['name']->getDaTa())
                 ->setDescription($form['description']->getDaTa())
                 ->setDueAt($form['dueAt']->getDaTa())

@@ -24,6 +24,11 @@ general:
   description: Description
   due_date: Date effective
   category: Catégorie
+  status:
+    title: Statut
+    1: À faire
+    2: En cours d'exécution
+    3: Terminée
   button:
     success: Valider
     cancel: Annuler

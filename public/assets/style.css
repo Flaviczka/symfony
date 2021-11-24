@@ -4,7 +4,7 @@
 }
 
 #tableTasks {
-    margin: 3em;
+    margin: 1em;
     border-collapse: collapse;
 }
 
@@ -32,4 +32,16 @@
 
 #tableUsers_length {
     margin: 2em;
+}
+
+.done {
+    background-color: lightgreen;
+}
+
+.todo {
+    background-color: rgb(233, 144, 144);
+}
+
+.wip {
+    background-color: rgb(243, 200, 120);
 }
