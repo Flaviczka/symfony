@@ -45,6 +45,17 @@ class TaskController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        $user = $this->getUser();
+        $role = $user->getRoles();
+        $id = $user->getId();
+        $admin = 'ROLE_ADMIN';
+
+        if (in_array($admin, $role)) {
+            //récupération de toutes les données
+            $tasks = $this->repository->findAll();
+        } else {
+            $tasks = $this->repository->findBy(['user' => $id]);
+        }
         //$translator->trans('general.button.delete');
         // $translated = new TranslatableMessage('Symfony is great');
         //Recuperation des infos user
@@ -54,8 +65,7 @@ class TaskController extends AbstractController
         //$repository = $this->getDoctrine()->getRepository(Task::class);
         //$this->addFlash('danger', $translator->trans('general.button.delete'));
 
-        //récupération de toutes les données
-        $tasks = $this->repository->findAll();
+
 
         //echo $translated;
         //Affichage des données
@@ -135,6 +145,8 @@ class TaskController extends AbstractController
         if (!$task) {
             $task = new Task;
             $task->setCreatedAt(new \DateTime());
+            $user = $this->getUser();
+            $task->setUser($user);
         }
 
 

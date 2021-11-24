@@ -37,6 +37,23 @@ class AppFixtures extends Fixture
         // créer un objet faker
         $faker = Factory::create('fr_FR');
 
+        //creation de 5 utilisateurs
+        for ($u = 0; $u < 5; $u++) {
+            $user = new User;
+
+            //hashage du mdp avec les param de sécu du $encoder
+            $hash = $this->encoder->hashPassword($user, "password");
+            $user->setPassword($hash);
+            //si 1er user, rôle => admin
+            if ($u === 0) {
+                $user->setRoles(["ROLE_ADMIN"])
+                    ->setEmail("admin@admin.fr");
+            } else {
+                $user->setEmail($faker->safeEmail());
+            }
+            $manager->persist($user);
+        }
+
         //creation de nos 5 catégories
         for ($c = 0; $c < 5; $c++) {
             //creation d'un nouvel objet Tag
@@ -75,6 +92,7 @@ class AppFixtures extends Fixture
         //récupération des catégories créées
         $tags = $manager->getRepository(Tag::class)->findAll();
         $status = $manager->getRepository(Status::class)->findAll();
+        $listUsers = $manager->getRepository(User::class)->findAll();
 
         //création entre 15 et 30 tâches aléatoire
         for ($t = 0; $t < mt_rand(15, 30); $t++) {
@@ -87,28 +105,11 @@ class AppFixtures extends Fixture
                 ->setCreatedAt(new \DateTime())
                 ->setDueAt($faker->dateTimeBetween('now', '6 months'))
                 ->setTag($faker->randomElement($tags))
-                ->setStatus($faker->randomElement($status));
-
+                ->setStatus($faker->randomElement($status))
+                ->setUser($faker->randomElement($listUsers));
 
             //faire persister les données
             $manager->persist($task);
-        }
-
-        //creation de 5 utilisateurs
-        for ($u = 0; $u < 5; $u++) {
-            $user = new User;
-
-            //hashage du mdp avec les param de sécu du $encoder
-            $hash = $this->encoder->hashPassword($user, "password");
-            $user->setPassword($hash);
-            //si 1er user, rôle => admin
-            if ($u === 0) {
-                $user->setRoles(["ROLE_ADMIN"])
-                    ->setEmail("admin@admin.fr");
-            } else {
-                $user->setEmail($faker->safeEmail());
-            }
-            $manager->persist($user);
         }
 
         $manager->flush();
