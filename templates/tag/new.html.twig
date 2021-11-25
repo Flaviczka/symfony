@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Tag
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Create new Tag</h1>
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="d-flex justify-content-center">
+					<p class="fw-bold text-{{ label }}">
+						{{ message }}
+					</p>
+				</div>
+			{% endfor %}
+		{% endfor %}
+
+		{{ include('tag/_form.html.twig') }}
+
+		<div style="padding-top: 1em;">
+			<a href="{{ path('user_listing', app.request.attributes.get('_route_params')) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">{{'general.button.back'|trans}}</a>
+			<a href="{{ path('app_login', app.request.attributes.get('_route_params')) }}" class="btn btn-warning btn-lg active" role="button" aria-pressed="true">{{'general.button.home'|trans}}</a>
+		</div>
+	</div>
+{% endblock %}

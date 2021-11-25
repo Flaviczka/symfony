@@ -19,57 +19,24 @@
 
 
 		<a href="{{ path('task_create') }}" class="btn btn-primary">{% trans from "messages" %}general.button.add{% endtrans %}</a>
+		<a href="{{ path('task_myarchives') }}" class="btn btn-primary">{% trans from "messages" %}general.button.archives{% endtrans %}</a>
 		{% if is_granted('ROLE_ADMIN') %}
 			<a href="{{ path('user_listing') }}" class="btn btn-primary">{% trans from "messages" %}user.title{% endtrans %}</a>
+			<a href="{{ path('tag_index') }}" class="btn btn-primary">{% trans from "messages" %}tag.title{% endtrans %}</a>
 		{% endif %}
 		<a href="{{ path('task_download') }}" class="btn btn-primary">{% trans from "messages" %}general.button.download{% endtrans %}</a>
-
-		<table class="table-striped table-bordered" id="tableTasks">
-			<thead>
-				<th>Id</th>
-				<th>{% trans from "messages" %}general.name{% endtrans %}</th>
-				<th>{% trans from "messages" %}general.description{% endtrans %}</th>
-				<th>{% trans from "messages" %}general.due_date{% endtrans %}</th>
-				<th>{% trans from "messages" %}general.category{% endtrans %}</th>
-				<th>{{'general.status.title' | trans}}</th>
-				<th></th>
-				<th></th>
-			</thead>
-			<tbody>
-				{% if tasks is defined %}
-					{% for task in tasks %}
-						<tr>
-							<th scope="row">{{ task.id }}</th>
-							<td>{{ task.name }}</td>
-							<td>{{ task.description }}</td>
-							<td>{{ task.dueAt | date('d/m/Y H:i') }}</td>
-							<td>{{ task.tag.name }}</td>
-							{% if task.status.label == 1 %}
-								<td class="todo">
-								{% else %}
-									{% if task.status.label == 2 %}
-										<td class="wip">
-										{% else %}
-											{% if task.status.label == 3 %}
-												<td class="done">
-												{% endif %}
-											{% endif %}
-										{% endif %}
-										{{('general.status.' ~ task.status.label) | trans}}</td>
-									<td>
-										<a href="{{ path('task_update', {'id': task.id}) }}" class="btn btn-success">{% trans from "messages" %}general.button.update{% endtrans %}</a>
-									</td>
-									<td>
-										<a href="{{ path('task_delete', {'id': task.id}) }}" class="btn btn-danger">{% trans from "messages" %}general.button.delete{% endtrans %}</a>
-									</td>
-								</tr>
-							{% endfor %}
-						{% endif %}
-
-					</tbody>
-				</table>
-			</tbody>
+		<div class="d-flex justify-content-between mb-3">
+			<select name="archives" id="selectedValues" onchange='location = this.value;'>
+				<option value="archives" selected>Type d'archivage</option>
+				<option value="archives_auto">Auto</option>
+				<option value="archives_manual">Manuel</option>
+			</select>
 		</div>
 
 
-	{% endblock %}
+		{% include "task/listing.html.twig" %}
+
+	</div>
+
+
+{% endblock %}

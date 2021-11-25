@@ -43,18 +43,19 @@ class TaskController extends AbstractController
     /**
      * @Route("/listing", name="listing")
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
         $user = $this->getUser();
         $role = $user->getRoles();
         $id = $user->getId();
         $admin = 'ROLE_ADMIN';
+        $slug = $user->getIsPrefered();
 
         if (in_array($admin, $role)) {
             //récupération de toutes les données
-            $tasks = $this->repository->findAll();
+            $tasks = $this->repository->findBy(['isArchived' => '0']);
         } else {
-            $tasks = $this->repository->findBy(['user' => $id]);
+            $tasks = $this->repository->findBy(['isArchived' => '0', 'user' => $id]);
         }
         //$translator->trans('general.button.delete');
         // $translated = new TranslatableMessage('Symfony is great');
@@ -72,7 +73,7 @@ class TaskController extends AbstractController
         //dump($tasks);
 
         return $this->render('task/index.html.twig', [
-            'tasks' => $tasks, 'locale' => $request->getLocale()
+            'tasks' => $tasks, 'slug' => $slug
         ]);
     }
 
@@ -235,5 +236,112 @@ class TaskController extends AbstractController
             'Attachement' => true
         ]);
         return new Response();
+    }
+
+    /**
+     * Vérifier si la date effective est passée ou non
+     * @param Task $task
+     * @return boolean
+     */
+    public function checkDueAt(Task $task)
+    {
+        $flag = false;
+        $dueAt = $task->getDueAt();
+        $today = new \DateTime();
+
+        if ($today > $dueAt) {
+            $flag = true;
+        }
+        return $flag;
+    }
+
+    /**
+     * @Route("/archives", name="myarchives")
+     */
+    public function indexArchives(): Response
+    {
+        $user = $this->getUser();
+        $role = $user->getRoles();
+        $id = $user->getId();
+        $admin = 'ROLE_ADMIN';
+
+        if (in_array($admin, $role)) {
+            //récupération de toutes les données
+            $tasks = $this->repository->findBy(['isArchived' => '1']);
+        } else {
+            $tasks = $this->repository->findBy(['isArchived' => '1', 'user' => $id]);
+        }
+        //$translator->trans('general.button.delete');
+        // $translated = new TranslatableMessage('Symfony is great');
+        //Recuperation des infos user
+        //$user = $this->getUser();
+        //dd($user);
+        //Recuperation du répository de nos Tasks avec Doctrine
+        //$repository = $this->getDoctrine()->getRepository(Task::class);
+        //$this->addFlash('danger', $translator->trans('general.button.delete'));
+
+
+
+        //echo $translated;
+        //Affichage des données
+        //dump($tasks);
+
+        return $this->render('task/archives.html.twig', [
+            'tasks' => $tasks
+        ]);
+    }
+
+    /**
+     * @Route("/archive/{id}", name="archive", requirements={"id"="\d+"})
+     * @return Response
+     */
+    public function archiveTask(Task $task)
+    {
+        if ($this->checkDueAt($task)) {
+            $task->setIsArchived(1);
+            $this->manager->persist($task);
+            $this->manager->flush();
+            $this->addFlash(
+                'success',
+                'La tâche a bien été archivée'
+            );
+        } else {
+            $this->addFlash(
+                'danger',
+                'Impossible d\'archiver une tâche dont l\'échéance n\'est pas dépassée'
+            );
+        }
+        return $this->redirectToRoute('task_listing');
+    }
+
+    /**
+     * @Route("/archives_{slug}")
+     *
+     * @param String $slug
+     * @return void
+     */
+    public function displayTable(String $slug)
+    {
+
+
+        //  Récupération des infos de l'utilisateur.
+        $user = $this->getUser();
+
+
+        if ($slug != 'manual') {
+            $tasks = $this->repository->findAll();
+            $user->setIsPrefered(0);
+            for ($i = 0; $i < count($tasks); $i++) {
+                if ($this->checkDueAt($tasks[$i])) {
+                    $this->archiveTask($tasks[$i]);
+                }
+            }
+        } else {
+            $user->setIsPrefered(1);
+        }
+        $this->manager->persist($user);
+        $this->manager->flush();
+
+        return $this->index();
     }
 }

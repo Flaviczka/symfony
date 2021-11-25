@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tag
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Tag</h1>
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="d-flex justify-content-center">
+					<p class="fw-bold text-{{ label }}">
+						{{ message }}
+					</p>
+				</div>
+			{% endfor %}
+		{% endfor %}
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ tag.id }}</td>
+				</tr>
+				<tr>
+					<th>{{'general.name' | trans}}</th>
+					<td>{{ tag.name }}
+						<a style="margin: 1em;" class="btn btn-success" href="{{ path('tag_edit', {'id': tag.id}) }}">{{'general.button.update' | trans}}</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		{{ include('tag/_delete_form.html.twig') }}
+
+		<div style="padding-top: 1em;">
+			<a href="{{ path('user_listing', app.request.attributes.get('_route_params')) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">{{'general.button.back'|trans}}</a>
+			<a href="{{ path('app_login', app.request.attributes.get('_route_params')) }}" class="btn btn-warning btn-lg active" role="button" aria-pressed="true">{{'general.button.home'|trans}}</a>
+		</div>
+	</div>
+
+{% endblock %}

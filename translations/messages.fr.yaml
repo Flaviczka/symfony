@@ -20,6 +20,7 @@ auth:
   mail_ending: Ciao!
 
 general:
+  title_list_task: Tâches
   backhomepage: Retour à la page d'accueil
   requestpage: Vous n'avez pas les accès nécessaires pour accéder à cette page essayer une autre URL ou
   error403Titre: Accès Non Autorisé
@@ -41,6 +42,9 @@ general:
     back: Retour
     home: Accueil
     download: Télécharger
+    show: Afficher
+    archives: Archives
+    archive: Archiver
 nav:
 sLengthMenu: Montrer _MENU_ entrées par page
 sSearch: Rechercher
@@ -59,3 +63,5 @@ user:
   roles: Roles
   admin: Administrateur
   user: Utilisateur
+tag:
+  title: Gestion des Catégories

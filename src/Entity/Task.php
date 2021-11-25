@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 /**
  * Task
@@ -66,6 +67,16 @@ class Task
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isArchived;
+
+    public function __construct(bool $isArchived = false)
+    {
+        $this->setIsArchived($isArchived);
+    }
 
     public function getId(): ?int
     {
@@ -152,6 +163,18 @@ class Task
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getIsArchived(): ?bool
+    {
+        return $this->isArchived;
+    }
+
+    public function setIsArchived(bool $isArchived): self
+    {
+        $this->isArchived = $isArchived;
 
         return $this;
     }

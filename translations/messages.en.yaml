@@ -18,6 +18,7 @@ auth:
   mail_expire: This link will expire in
   mail_ending: Cheers!
 general:
+  title_list_task: Tasks
   backhomepage: Back to the Home Page
   requestpage: The requested page couldn't be located. Checkout for any URL misspelling or
   error403Titre: Access Denied
@@ -39,6 +40,10 @@ general:
     back: Go back
     home: Home
     download: Download
+    show: Show
+    archives: Archives
+    archive: Archive
+
 nav:
 sLengthMenu: Show _MENU_ records per page
 sSearch: Search
@@ -57,3 +62,5 @@ user:
   roles: Roles
   admin: Administrator
   user: User
+tag:
+  title: Tag Management

@@ -7,6 +7,7 @@ use App\Entity\Tag;
 use App\Entity\Task;
 use App\Entity\Status;
 use App\Repository\StatusRepository;
+use Bartender;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -46,8 +47,13 @@ class TaskType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $bartender = new Bartender;
+        $filteredBeerListNameName = $bartender->filterBeerList();
+
+
         $builder
-            ->add('name', TextType::class, [
+            ->add('name', ChoiceType::class, [
+                'choices' => $filteredBeerListNameName,
                 'label' => $this->translator->trans('general.name')
             ])
             ->add('description', TextareaType::class, [
@@ -65,9 +71,9 @@ class TaskType extends AbstractType
             ])
             ->add('status', ChoiceType::class, [
                 'choices' => [
-                    $this->translator->trans("general.status.1") => $this->repository->find(1),
-                    $this->translator->trans("general.status.2") => $this->repository->find(2),
-                    $this->translator->trans("general.status.3") => $this->repository->find(3)
+                    $this->translator->trans("general.status.1") => $this->repository->findAll()[0],
+                    $this->translator->trans("general.status.2") => $this->repository->findAll()[1],
+                    $this->translator->trans("general.status.3") => $this->repository->findAll()[2]
                 ],
                 'label' => $this->translator->trans("general.status.title"),
                 'expanded' => false,

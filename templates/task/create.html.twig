@@ -5,5 +5,8 @@
 		{{ form_widget(form) }}
 		{{ form_end(form) }}
 	</div>
-
+	<div style="padding-top: 1em;">
+		<a href="{{ path('task_listing', app.request.attributes.get('_route_params')) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">{{'general.button.back'|trans}}</a>
+		<a href="{{ path('app_login', app.request.attributes.get('_route_params')) }}" class="btn btn-warning btn-lg active" role="button" aria-pressed="true">{{'general.button.home'|trans}}</a>
+	</div>
 {% endblock %}
